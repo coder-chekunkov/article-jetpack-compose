@@ -68,6 +68,8 @@ fun GreetingComposePreview() {
 > Если свойство можно применить почти к каждому элементу, например background, то атрибут следует искать в Modifier.
 > Если свойство уникально для элемента, например fontSize, то атрибут следует искать в параметрах элемента. 
 
+Также необходимо помнить, что порядок вызовов функций у Modifier очень важен. 
+
 Резюмируя, можно сказать, что Modifier похож на билдер, который помогает декорировать объекты. Разработчик использует его методы для настройки и модификации элемента. 
 
 ### Layouts
@@ -419,7 +421,7 @@ fun LazyListPreview() {
 @Preview
 @Composable
 fun TestClickerPreview() {
-    val counter = remember { mutableStateOf(0) } // !!!
+    val counter by remember { mutableStateOf(0) } // !!!
     Column(
         modifier = Modifier
             .size(width = 150.dp, height = 100.dp)
@@ -427,7 +429,7 @@ fun TestClickerPreview() {
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "${counter.value}",
+            text = "$counter",
             textAlign = TextAlign.Center,
             fontSize = 20.sp
         )
@@ -436,10 +438,10 @@ fun TestClickerPreview() {
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(onClick = { counter.value++ }) {
+            Button(onClick = { counter++ }) {
                 Text(text = "+")
             }
-            Button(onClick = { counter.value-- }) {
+            Button(onClick = { counter-- }) {
                 Text(text = "-")
             }
         }
@@ -460,7 +462,7 @@ Jetpack Compose не требует только использования `Mut
 
 В данной статье были рассмотрены основы Jetpack Compose. Конечно, это далеко не все, что можно и нужно разбирать. Если после прочтения данной статьи библиотека заинтересовала, то обязательно следует изучить такие важные темы, как `Side Effects`, `Gestures`, `Graphics`, `Animation`, `Navigation`, `ComposionLocal`. 
 
-Для тех, у кого есть желание написать небольшое приложение на Compose, можно выполнить следующее практическое задание, решешие которого можно найти [здесь](https://github.com/coder-chekunkov/JetpackCompose-Article).
+Для тех, у кого есть желание написать небольшое приложение на Compose, можно выполнить следующее практическое задание, решешие которого можно найти в данном репозитории.
 
 > **Практическое задание.** Корпоративное приложение - "База данных сотрудников".
 > 
